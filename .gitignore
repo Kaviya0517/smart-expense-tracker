@@ -1,0 +1,22 @@
+  # ===== BACKEND =====
+backend/node_modules/
+backend/.env
+backend/uploads/
+backend/*.traineddata
+
+# ===== FRONTEND =====
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.production
+frontend/.env.local
+
+# ===== GENERAL =====
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+
+# ===== DATA =====
+data/
+*.db
