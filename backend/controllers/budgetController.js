@@ -1,5 +1,5 @@
 const Budget = require('../models/Budget');
-const Expense = require('../models/Expense');
+const Expense = require('../models/expense');
 
 // GET ALL BUDGETS FOR USER
 const getBudgets = async (req, res) => {

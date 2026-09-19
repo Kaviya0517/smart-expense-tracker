@@ -1,5 +1,5 @@
-const Receipt = require('../models/Receipt');
-const Expense = require('../models/Expense');
+const Receipt = require('../models/receipt');
+const Expense = require('../models/expense');
 const Tesseract = require('tesseract.js');
 const { parseReceiptWithRegex } = require('../services/parseService');
 

@@ -1,5 +1,5 @@
-const Expense = require('../models/Expense');
-const Receipt = require('../models/Receipt');
+const Expense = require('../models/expense');
+const Receipt = require('../models/receipt');
 
 // GET ALL EXPENSES FOR LOGGED IN USER
 const getAllExpenses = async (req, res) => {
