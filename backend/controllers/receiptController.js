@@ -54,6 +54,10 @@ const uploadReceipt = async (req, res) => {
 
     // Step 2 — Parse extracted text
     console.log('Parsing receipt data...');
+   console.log("========== OCR TEXT ==========");
+console.log(extractedText);
+console.log("==============================");
+   
     const extractedData = parseReceiptWithRegex(extractedText);
 
     // Step 3 — Update receipt in DB
