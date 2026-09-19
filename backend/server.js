@@ -2,7 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const fs = require('fs');
 
+if (!fs.existsSync('uploads')) {
+  fs.mkdirSync('uploads');
+}
 dotenv.config({ quiet: true });
 
 const app = express();
