@@ -146,7 +146,7 @@ export default function ExpenseList() {
   if (loading) return <div style={{ padding: '20px' }}>Loading...</div>;
 
   return (
-    <div style={{ padding: '20px', maxWidth: '1400px', margin: '0 auto' }}>
+    <div className="expense-list-page" style={{ padding: '20px', maxWidth: '1400px', margin: '0 auto' }}>
       <h1>📋 All Expenses</h1>
 
       {/* Filter & Sort Section */}

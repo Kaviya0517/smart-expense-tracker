@@ -242,29 +242,56 @@ export default function Dashboard() {
             </div>
           )}
 
-          <label htmlFor="receipt-upload" className="upload-area">
+          <div className="upload-area">
             <div className="upload-content">
               <span className="upload-icon">📷</span>
-              <h3>Drag and drop receipt here</h3>
-              <p>or tap to select a file</p>
+              <h3>Upload a receipt</h3>
+              <p>Choose from gallery or use your camera</p>
               <p className="upload-hint">Supports JPEG, PNG, WEBP (Max 5MB)</p>
             </div>
-            <button type="button" className="upload-btn" disabled={uploading}>
-              {uploading ? (
-                <><span className="spinner-small"></span> Processing...</>
-              ) : (
-                <>📥 Choose File</>
-              )}
-            </button>
+
+            <div className="upload-actions">
+              <button
+                type="button"
+                className="upload-btn secondary"
+                disabled={uploading}
+                onClick={() => document.getElementById('receipt-upload-gallery').click()}
+              >
+                📁 From Gallery
+              </button>
+
+              <button
+                type="button"
+                className="upload-btn"
+                disabled={uploading}
+                onClick={() => document.getElementById('receipt-upload-camera').click()}
+              >
+                {uploading ? (
+                  <><span className="spinner-small"></span> Processing...</>
+                ) : (
+                  <>📷 Use Camera</>
+                )}
+              </button>
+            </div>
+
             <input
-              id="receipt-upload"
+              id="receipt-upload-gallery"
+              type="file"
+              accept="image/*"
+              onChange={handleFileUpload}
+              disabled={uploading}
+              style={{ display: 'none' }}
+            />
+            <input
+              id="receipt-upload-camera"
               type="file"
               accept="image/*"
               capture="environment"
               onChange={handleFileUpload}
               disabled={uploading}
+              style={{ display: 'none' }}
             />
-          </label>
+          </div>
         </section>
 
        {/* Quick Actions */}

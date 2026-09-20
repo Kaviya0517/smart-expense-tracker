@@ -26,9 +26,19 @@ body.dark-mode {
 }
 
 html, body, #root {
-  height: 100%;
+  width: 100%;
+  min-height: 100%;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: auto;
+}
+
+body {
+  min-height: 100vh;
 }
 
 a {
@@ -79,12 +89,15 @@ body.dark-mode ::-webkit-scrollbar-track {
 /* ===== GLOBAL MOBILE FIX ===== */
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html, body, #root {
-  overflow-x: hidden;
   width: 100%;
   max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Fix all sections overflowing */
@@ -97,5 +110,4 @@ html, body, #root {
 .tips-section {
   width: 100%;
   max-width: 100%;
-  overflow: hidden;
 }

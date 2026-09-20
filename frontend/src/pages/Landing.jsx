@@ -10,7 +10,8 @@ export default function Landing() {
       fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
       margin: 0,
       padding: 0,
-      overflowX: 'hidden'
+      overflowX: 'hidden',
+      overflowY: 'auto'
     }}>
 
       {/* ===== NAVBAR ===== */}

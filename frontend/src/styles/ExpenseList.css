@@ -1,3 +1,7 @@
+.expense-list-page {
+  padding-bottom: 110px;
+}
+
 .filters-section {
   background: white;
   padding: 20px;
@@ -146,13 +150,17 @@
 .expenses-table-container {
   background: white;
   border-radius: 8px;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
   margin-bottom: 20px;
+  width: 100%;
 }
 
 .expenses-table {
   width: 100%;
+  min-width: 820px;
   border-collapse: collapse;
   font-size: 14px;
 }
@@ -316,6 +324,14 @@
 }
 
 @media (max-width: 768px) {
+  .expense-list-page {
+    padding: 16px 12px 180px;
+  }
+
+  .summary-section {
+    margin-bottom: 30px;
+  }
+
   .filters-section {
     flex-direction: column;
   }
@@ -329,6 +345,7 @@
   }
 
   .expenses-table {
+    min-width: 760px;
     font-size: 12px;
   }
 
@@ -338,6 +355,8 @@
   }
 
   .actions {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px;
   }
 }
