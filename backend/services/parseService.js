@@ -21,22 +21,23 @@ const extractAmountCandidates = (rawText) => {
 
   const totalLabels = [
     'grand total', 'total amount', 'net amount', 'amount due', 'net payable',
-    'payable', 'bill amount', 'invoice total', 'total', 'grand', 'amount', 'net total'
+    'payable', 'bill amount', 'invoice total', 'net total', 'total', 'grand', 'amount'
   ];
 
   const ignoreLabels = [
     'cash', 'paid', 'payment', 'received', 'balance', 'change', 'return', 'refund',
-    'card', 'upi', 'wallet', 'discount', 'promo', 'coupon', 'advance'
+    'card', 'upi', 'wallet', 'discount', 'promo', 'coupon', 'advance', 'cashback'
   ];
 
-  for (const line of lines) {
+  for (let index = 0; index < lines.length; index++) {
+    const line = lines[index];
     const lower = line.toLowerCase();
     const hasIgnore = ignoreLabels.some(label => lower.includes(label));
     const hasTotalLabel = totalLabels.some(label => lower.includes(label));
 
-    if (!/\d/.test(line) || hasIgnore && !hasTotalLabel) continue;
+    if (!/\d/.test(line) || (hasIgnore && !hasTotalLabel)) continue;
 
-    const match = line.match(/(?:grand\s*total|total\s*amount|net\s*amount|amount\s*due|net\s*payable|payable|bill\s*amount|invoice\s*total|grand|total|amount|net\s*total)\s*[:\-]*\s*(?:rs\.?|inr|₹)?\s*([\d,]+\.?\d{0,2})/i)
+    const match = line.match(/(?:grand\s*total|total\s*amount|net\s*amount|amount\s*due|net\s*payable|payable|bill\s*amount|invoice\s*total|grand\s*total|net\s*total|total|amount)\s*[:\-]*\s*(?:rs\.?|inr|₹)?\s*([\d,]+\.?\d{0,2})/i)
       || line.match(/(?:rs\.?|inr|₹)\s*([\d,]+\.?\d{0,2})(?:\s*(?:only|\/\-))?$/i)
       || line.match(/\b([\d,]+\.?\d{1,2})\b(?=\s*(?:only|\/\-)?$)/i);
 
@@ -45,18 +46,24 @@ const extractAmountCandidates = (rawText) => {
       if (value !== null && value > 0 && value < 500000) {
         let score = 0;
 
-        if (lower.includes('grand total')) score += 100;
-        else if (lower.includes('total amount')) score += 95;
-        else if (lower.includes('net amount')) score += 95;
-        else if (lower.includes('amount due')) score += 90;
-        else if (lower.includes('net payable')) score += 90;
-        else if (lower.includes('payable')) score += 85;
-        else if (lower.includes('bill amount')) score += 85;
-        else if (lower.includes('invoice total')) score += 85;
-        else if (lower.includes('total')) score += 80;
-        else if (lower.includes('amount')) score += 60;
+        if (lower.includes('grand total')) score += 220;
+        else if (lower.includes('total amount')) score += 210;
+        else if (lower.includes('net amount')) score += 210;
+        else if (lower.includes('amount due')) score += 200;
+        else if (lower.includes('net payable')) score += 200;
+        else if (lower.includes('payable')) score += 170;
+        else if (lower.includes('invoice total')) score += 170;
+        else if (lower.includes('bill amount')) score += 170;
+        else if (lower.includes('net total')) score += 170;
+        else if (lower.includes('total')) score += 140;
+        else if (lower.includes('amount')) score += 80;
 
-        if (hasIgnore) score -= 75;
+        if (lower.includes('subtotal')) score -= 80;
+        if (lower.includes('gst') || lower.includes('tax')) score -= 40;
+        if (hasIgnore) score -= 100;
+
+        if (index > lines.length * 0.6) score += 25;
+        if (index > lines.length * 0.8) score += 15;
         candidates.push({ line, value, score });
       }
     }
